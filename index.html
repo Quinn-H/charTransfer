@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/animate.css@3.5.2/animate.min.css">
+<!-- or -->
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+<title>字符串长度计算器</title>
+<style>
+span { background: #333366; color:red; font-size: 40px; };
+textarea { background: #FFFFCC };
+
+</style>
+</head>
+<body class="bg-dark">
+        <div id="app" class="container bg-dark">
+            <div class="row">
+                <div class="col-sm-12 text-center text-success animated slideInUp" style="margin-top:70px; padding-bottom: 20px">
+                    <h3>你输入了<span> {{ answer }} </span>个字符</h3>
+                </div>
+            </div>
+            <textarea rows="10" cols="10" placeholder="请在这里粘贴或者输入文字进行字符转换..." class="col-sm-12" v-model="message"></textarea>
+            <div class="text-info text-center animated slideInDown">
+                <h4>转换规则</h4>
+                <h5>中文</h5>
+                <p>1个汉字 = 2个字符 , 1个标点 = 2个字符</p>
+                <p>1个空格 = 1个字符 , 1个数字 = 1个字符</p>
+                <h5>英文</h5>
+                <p>1个字母，标点，空格，数字 都等于 1个字符</p>
+            </div>
+        </div>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            message: '',
+            answer: '0'
+            },
+        watch: {
+            // 如果 'message' 发生了改变，这个函数就会运行
+            message: function (newMessage, oldMessage) {
+                 this.answer = this.message.replace(/[^\x00-\xff]/g, '**').length
+                }
+        }
+        })
+</script>
+</body>
+</html>
